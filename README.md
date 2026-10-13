@@ -45,3 +45,13 @@ Without them the app works normally and push stays off — the same as the Expo 
 Translations: wrap new text in `tr('English text')` and add the same key to `lib/i18n/hi.dart` and `kn.dart`.
 Business details shown in the app live in `lib/util/misc.dart` (`Business`) — fill them in before launch.
 Colours: run `node scripts/contrast.mjs` after changing them (WCAG AA check against the glass surfaces).
+
+## Contributing
+
+- The Flutter app lives on `flutter-migration` until it replaces the Expo app on `main`. Branch from it.
+- One branch per ticket, named after the ticket ID, for example `payp-051-ios-push-token`.
+- Open a pull request into `flutter-migration` (or `main` once the switch is made). CI (`.github/workflows/ci.yml`)
+  runs `flutter pub get`, `flutter analyze` and `flutter test` on Flutter 3.47.7 and must pass before merging.
+- Follow `AGENTS.md`: all text through `tr()` with Hindi and Kannada entries, design-system widgets, and a fake-API
+  fixture for every new endpoint.
+- Dependabot opens weekly update pull requests for pub packages and GitHub Actions.
