@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -25,6 +26,18 @@ class AuthState extends ChangeNotifier {
   Me? lastUser;
   bool sessionExpired = false;
   client.Tokens? _tokens;
+
+  /// Server-controlled switches for modules kept out of v1. Loaded after sign-in; all off until then.
+  Features features = Features.allOff;
+
+  Future<void> _loadConfig() async {
+    try {
+      features = (await ConfigApi.get()).features;
+    } catch (_) {
+      features = Features.allOff;
+    }
+    notifyListeners();
+  }
 
   Future<void> _persist(client.Tokens? t) async {
     client.setTokens(t);
@@ -57,6 +70,7 @@ class AuthState extends ChangeNotifier {
         client.setTokens(t);
         _tokens = t;
         user = await MeApi.get();
+        unawaited(_loadConfig());
       } catch (_) {
         // Expired/invalid tokens or server unreachable: start signed out instead of blocking on splash.
         await _persist(null);
@@ -71,6 +85,7 @@ class AuthState extends ChangeNotifier {
     sessionExpired = false;
     user = res.user;
     notifyListeners();
+    unawaited(_loadConfig());
   }
 
   Future<void> signOut() async {
@@ -82,6 +97,7 @@ class AuthState extends ChangeNotifier {
     }
     await _persist(null);
     user = null;
+    features = Features.allOff;
     notifyListeners();
   }
 

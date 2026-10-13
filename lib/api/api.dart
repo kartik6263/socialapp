@@ -295,6 +295,10 @@ class ContentApi {
   static Future<ContentPage> page(String slug) async => ContentPage(await Http.get('/api/content/pages/${Uri.encodeComponent(slug)}'));
 }
 
+class ConfigApi {
+  static Future<AppConfig> get() async => AppConfig(await Http.get('/api/config'));
+}
+
 class CategoriesApi {
   static Future<List<Category>> list() async => _list(await Http.get('/api/categories'), Category.new);
 }
