@@ -272,6 +272,7 @@ Object? fakeResponse(String method, Uri uri) {
       'body': '# Privacy policy\n\nWe collect **only** what Plans needs. Contact [Grievance Officer](mailto:grievance@example.com).\n\n## Your rights\n\n- Download your data\n- Delete your account\n\n_Last reviewed by [Company legal name]._',
     };
   }
+  if (p == '/api/config') return {'features': {'payments': false, 'banners': false, 'broadcasts': false}};
   if (p == '/api/categories') return [{'id': 1, 'name': 'Photography', 'labelHi': 'फ़ोटोग्राफ़ी', 'labelKn': null}, {'id': 2, 'name': 'Trek', 'labelHi': null, 'labelKn': null}];
   return null;
 }

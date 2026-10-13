@@ -14,6 +14,26 @@ abstract class Model {
   const Model(this.json);
 }
 
+// ---------- Config ----------
+
+/// Modules built but kept out of v1 (payments, banners, broadcasts). Mirrors backend ConfigController.
+class Features {
+  final bool payments, banners, broadcasts;
+  const Features({this.payments = false, this.banners = false, this.broadcasts = false});
+  Features.fromJson(Json j)
+      : payments = j['payments'] == true,
+        banners = j['banners'] == true,
+        broadcasts = j['broadcasts'] == true;
+
+  /// Until the server says otherwise, switchable modules stay hidden.
+  static const allOff = Features();
+}
+
+class AppConfig {
+  final Features features;
+  AppConfig(Json j) : features = _opt(j['features'], Features.fromJson) ?? Features.allOff;
+}
+
 // ---------- Trust ----------
 
 /// Factual trust signals. Never scores, ratings or rankings.

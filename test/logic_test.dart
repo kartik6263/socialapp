@@ -73,6 +73,15 @@ void main() {
   });
 
   group('models', () {
+    test('AppConfig reads feature flags and treats anything missing as off', () {
+      final on = AppConfig({'features': {'payments': true, 'banners': false, 'broadcasts': true}}).features;
+      expect([on.payments, on.banners, on.broadcasts], [true, false, true]);
+      final empty = AppConfig({}).features;
+      expect([empty.payments, empty.banners, empty.broadcasts], [false, false, false]);
+      final partial = AppConfig({'features': {'banners': true}}).features;
+      expect([partial.payments, partial.banners, partial.broadcasts], [false, true, false]);
+    });
+
     test('Me parses the full /api/me shape and patches like a spread', () {
       final me = fakeMe();
       expect(me.privacy.language, 'en');
