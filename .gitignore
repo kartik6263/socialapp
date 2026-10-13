@@ -46,3 +46,9 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Firebase config (per environment, never committed) and local env files
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+.env
+.env.*
