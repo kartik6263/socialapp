@@ -1,0 +1,50 @@
+import 'package:plans/api/types.dart';
+
+/// A signed-in, onboarded member, shaped like the backend's /api/me response.
+Map<String, dynamic> meJson({String accountStatus = 'ACTIVE', bool onboarded = true, String language = 'en'}) => {
+      'id': 7,
+      'displayName': 'Ananya Kapoor',
+      'photoUrl': null,
+      'area': 'Indiranagar',
+      'signals': ['PHONE', 'IDENTITY'],
+      'signalsUnavailable': false,
+      'ageRange': '22–25',
+      'bio': 'Product designer, weekend trekker and live music regular.',
+      'city': 'Bengaluru',
+      'interests': ['Trekking', 'Live music', 'Photography'],
+      'languages': ['English', 'Hindi'],
+      'intents': ['FRIENDS', 'ACTIVITY_PARTNERS'],
+      'maskedPhone': '+91 ••••••3210',
+      'maskedEmail': 'an••••@example.com',
+      'onboarded': onboarded,
+      'accountStatus': accountStatus,
+      'role': 'USER',
+      'privacy': {
+        'profileVisibility': 'EVERYONE',
+        'areaLevel': 'NEIGHBOURHOOD',
+        'defaultPlanVisibility': 'DISCOVERABLE',
+        'planLocation': 'APPROXIMATE',
+        'connectionRequests': 'MY_PLANS',
+        'messages': 'CONNECTED',
+        'language': language,
+        'showAge': true,
+        'showArea': true,
+        'showIntent': true,
+        'showInterests': true,
+        'showPlans': true,
+        'discoverPeople': true,
+        'discoverParticipants': true,
+        'discoverDestination': false,
+        'discoverSearch': true,
+      },
+      'completeness': {'percent': 80, 'done': 4, 'total': 5, 'hint': 'Add a photo.'},
+      'organizer': {'id': 3, 'name': 'Ananya’s Photo Walks', 'type': 'INDIVIDUAL', 'status': 'IN_REVIEW', 'signals': [], 'upcomingCount': 2},
+      'hasPassword': true,
+      'passwordChangedAt': '2026-09-01T10:00:00Z',
+      'memberSince': '2025-03-10T10:00:00Z',
+      'unreadNotifications': 3,
+      'unreadConversations': 12,
+    };
+
+Me fakeMe({String accountStatus = 'ACTIVE', bool onboarded = true, String language = 'en'}) =>
+    Me(meJson(accountStatus: accountStatus, onboarded: onboarded, language: language));
