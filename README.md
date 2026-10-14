@@ -48,9 +48,9 @@ Colours: run `node scripts/contrast.mjs` after changing them (WCAG AA check agai
 
 ## Contributing
 
-- The Flutter app lives on `flutter-migration` until it replaces the Expo app on `main`. Branch from it.
+- The Flutter app lives on `main`. Branch from it.
 - One branch per ticket, named after the ticket ID, for example `payp-051-ios-push-token`.
-- Open a pull request into `flutter-migration` (or `main` once the switch is made). CI (`.github/workflows/ci.yml`)
+- Open a pull request into `main`. CI (`.github/workflows/ci.yml`)
   runs `flutter pub get`, `flutter analyze` and `flutter test` on Flutter 3.47.7 and must pass before merging.
 - Follow `AGENTS.md`: all text through `tr()` with Hindi and Kannada entries, design-system widgets, and a fake-API
   fixture for every new endpoint.
